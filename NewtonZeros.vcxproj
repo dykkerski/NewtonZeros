@@ -123,7 +123,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NewtonMethodController.cpp" />
+    <ClCompile Include="NewtonMethodModel.cpp" />
+    <ClCompile Include="NewtonMethodView.cpp" />
     <ClCompile Include="Źródło.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NewtonMethodController.h" />
+    <ClInclude Include="NewtonMethodModel.h" />
+    <ClInclude Include="NewtonMethodView.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

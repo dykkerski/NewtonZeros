@@ -1,2 +1,3 @@
-﻿  Źródło.cpp
-  NewtonZeros.vcxproj -> C:\Users\wasil\source\repos\NewtonZeros\Debug\NewtonZeros.exe
+﻿  NewtonMethodModel.cpp
+c:\users\wasil\source\repos\newtonzeros\newtonzeros\newtonmethodmodel.cpp(26): error C2601: "setParameters": definicje funkcji lokalnych są niedozwolone
+  c:\users\wasil\source\repos\newtonzeros\newtonzeros\newtonmethodmodel.cpp(24): note: ten wiersz zawiera znak „{”, który nie został jeszcze dopasowany
