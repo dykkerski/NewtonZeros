@@ -12,8 +12,10 @@ private:
 public:
 	NewtonMethodModel();
 	~NewtonMethodModel();
-};
 
+
+};
+template<typename T> 
 class Polynomial : public NewtonMethodModel
 {
 private:
@@ -25,10 +27,12 @@ public:
 	void setPolyS(string _polyS) { polyS = _polyS; }
 };
 
-class FristDerivative : public Polynomial
+class FirstDerivative : public Polynomial<double>
 {
 private:
 public:
+	FirstDerivative();
+
 
 };
 
@@ -38,7 +42,6 @@ private:
 public:
 	NewtonMethod();
 	~NewtonMethod();
-
 };
 
 
