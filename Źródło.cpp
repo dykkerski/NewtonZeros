@@ -5,6 +5,8 @@
 #include "NewtonMethodModel.h"
 #include "NewtonMethodController.h"
 #include "NewtonMethodView.h"
+#include <regex>
+#include <iterator>
 
 using namespace std;
 
@@ -16,9 +18,17 @@ int main(int argc, char * arv[])
 	string wielomian = nm.getPolyS();
 	cout << "Wielomian pobrany : " << wielomian << endl;
 
-	vector<string> wielVec;
-	
+	//regex term("[-+]?(\\d*)x(\\^[0-9])*");
 
+	//regex term("[-+]?(\\d*)x(\\^\\d+)?|\\d+");
+
+	nm.toMap(wielomian);
+
+	
+	 
+	
+	
+	cout << endl;
 	system("pause");
 	return EXIT_SUCCESS;
 }
