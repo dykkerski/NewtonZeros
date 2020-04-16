@@ -17,20 +17,16 @@ NewtonMethodModel::~NewtonMethodModel()
 
 };
 
-map<double, int> NewtonMethodModel::toMap(string _polyS)
+void NewtonMethodModel::setMap(string _polyS)
 {
 	_polyS = regex_replace(_polyS, regex("\\s+"), "" );            // usuwa spacje jesli wystepuja
 	cout << "_polyS po usunieciu spacji : " << _polyS << endl;    // test
-	regex term("(-?[0-9]+(\\.[0-9]+)?)x(\\^?([0-9]+))?|-?[0-9]+");   // wzorzec regex
+	regex term("((-?[0-9]+(\\.[0-9]+)?))?x(\\^?([0-9]+))?|-?[0-9]+(\\.[0-9]+)");   // wzorzec regex
 	vector<std::string> monos;                           // wektor jednomianów : suma to dany wielomian 
 
-	map<double, int> testMap;
-	testMap.insert(pair<double, int>(1.1, 40));   // mapa testowa
 	
-	map<double, int> polyM;
-	map<string,string> polyMs;
-
-	string coef, exp;
+	map<string,string> polyMs; // mapa wspó³czynników i odpowidaj¹cych wartoœci potêg
+	string coef = "1", exp = "0";
 
 	copy(sregex_token_iterator(_polyS.begin(),_polyS.end(), term), 
 		sregex_token_iterator(), back_inserter(monos));  // tworzy wektor jednomianow
@@ -39,28 +35,30 @@ map<double, int> NewtonMethodModel::toMap(string _polyS)
 	{
 		cout << n << endl;
 	}
-	size_t pos;
 
+	size_t pos = 0;
 	for (auto n : monos)
 	{
-		
-		pos = n.find_first_of('x');
+		pos = n.find_first_of('^');
 		cout << "pos : " << pos << endl;
-		if (pos != string::npos)
+		if (pos != string::npos)                          //  dla jednomianu : x^n
+		{
+			
+			coef = n.substr(0, pos-1);
+			exp = n.substr(pos + 1);
+			polyMs.insert(pair<string, string>(exp, coef));
+			continue;
+		}
+
+		pos = n.find_first_of('x');
+		if (pos != string::npos)                         // dla jednomianu : x^1
 		{
 			coef = n.substr(0, pos);
-			exp = n.substr(pos + 1);
-			polyMs.insert(pair<string, string>(coef, exp));
+			polyMs.insert(pair<string, string>("1", coef));   
+			continue;
 		}
-		else
 
-			polyMs.insert(pair<string, string>(n, "0"));  // 
-
-		cout << "polyMs: z petli : " << endl;
-		for (auto n : polyMs)
-		{
-			cout << n.first << " " << n.second << endl;
-		}
+		polyMs.insert(pair<string, string>("0", n));     // dla wyrazu wolnego : x^0
 	}
 
 	cout << "Zawartosc polyMs : " << endl;
@@ -68,7 +66,10 @@ map<double, int> NewtonMethodModel::toMap(string _polyS)
 	{
 		cout << n.first << " " << n.second << endl;
 	}
-	return testMap;
+	for (auto n : polyMs)
+	{
+		polyM.insert(pair<int, double>(stoi(n.first), stod(n.second)));
+	}
 };
 
 Polynomial::Polynomial()
@@ -81,6 +82,13 @@ Polynomial::~Polynomial()
 
 };
 
+void Polynomial::setValueP(map<int, double> _polyM, double x)
+{
+	for (auto n : _polyM)
+	{
+		valueP += (n.second * (pow(x, n.first))); 
+	}
+};
 
 
 FirstDerivative::FirstDerivative()

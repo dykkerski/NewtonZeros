@@ -11,26 +11,28 @@ using namespace std;
 class NewtonMethodModel
 {
 private:
-	string polyS = "-2x^3 - 4x^2 - 4.45x + 1";  // wielomian w postaci string 
-	map<double, int> polyM;
+	string polyS = "-2x^5 - 1x^2 - 4.45x + 12.6";  // wielomian w postaci string 
+	map<int, double> polyM;
 
 public:
 	NewtonMethodModel();
 	virtual ~NewtonMethodModel();
 	void setPolyS(string _polyS) { polyS = _polyS; }
 	string getPolyS() { return polyS; }
-	map<double, int> toMap(string);
-
+	void setMap(string);
+	map<int, double> getMap() { return polyM; }
 };
 
 class Polynomial : public NewtonMethodModel
 {
 private:
-	map<double, int> polyM;  // wspó³czynniki wielomianu
+	double valueP=0.0;
 
 public:
 	Polynomial();
 	~Polynomial();
+	void setValueP(map<int, double>, double);
+	double getValueP() { return valueP; }
 
 	
 };
